@@ -10,6 +10,10 @@ Persenoal reference only, **do not copy** the code or others
 - [Exploratory data analy](#exploratory-data-analy)
     - [Calculating summary statistics](#calculating-summary-statistics)
     - [Freq. counts for categorical data](#freq-counts-for-categorical-data)
+- [Visual exploratory data analysis](#visual-exploratory-data-analysis)
+    - [Visualizing single variables w/ histograms](#visualizing-single-variables-w-histograms)
+    - [Visualizing multiple variables w/ boxplots](#visualizing-multiple-variables-w-boxplots)
+    - [Visualizing multiple variables w/ scatter plots](#visualizing-multiple-variables-w-scatter-plots)
 
 # Diagnose data for cleaning
 
@@ -149,3 +153,71 @@ print(df['Site Fill'].value_counts(dropna=False))
     USE UNDER 300 CU.YD                          130
     Name: Site Fill, dtype: int64
 ```
+
+# Visual exploratory data analysis
+
+* Data visualization
+    * Great way to spot outliers and obvious errors
+    * More than just looking for patterns
+    * Plan data cleaning 
+* Bar plots and histograms
+    * Bar plots for discrete data counts
+    * Histograms for continuous data counts
+* Identifying the error
+    * Not all outliers are bad data pts.
+    * some can be error, but other are valid values
+* Box plots
+    * visualize basic summary statistics
+        * outliers
+        * Min/Max
+        * 25th, 50t, 75th percentage
+* Scatter plots
+    * relationship b/w 2 numeric variables
+    * flag potentially bad data
+        * errors not found by looking at 1 variable
+
+## Visualizing single variables w/ histograms
+
+* *.plot()* method allows to create a plot of ach col. of a DataFrame
+    * *kind* parameter allows specify the type of plot to use
+        * *kind='hist'* for histgram
+    * plot on log scale
+        * *logx=True* and *logy=True* parameter
+* Python will render a plot s.t. axis hold all info.
+* If end up w/ large amounts of whitespace in plot, it indicates counts or values too small to render
+```python {.input}
+import matplotlib.pyplot as plt
+df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
+plt.show()
+```
+![img1](imgs/img1.svg)
+
+## Visualizing multiple variables w/ boxplots
+
+* Hist. is great way of visualizing single variables. For multiple variables, use boxplots, especially when one variable is categorical
+* *.boxplot()*
+    * specift the *column* and *by* parameters.
+```python {.input} 
+import pandas as pd
+import matplotlib.pyplot as plt
+df.boxplot(column='initial_cost', by='Borough', rot=90)
+plt.show()
+```
+![img2](imgs/img2.svg)
+
+## Visualizing multiple variables w/ scatter plots
+
+* For two numeric cols. scatter plots are ideal
+    * *.plot()* method w/ *kind='scatter'*
+    * When outliers dominate the plot, an additional DF, *df_subset*, has been probided, in which some of the extreme values have been removed.
+```python {.input}
+import pandas as pd
+import matplotlib.pyplot as plt
+df.plot(kind='scatter', x='initial_cost', y='total_est_fee', rot=70)
+plt.show()
+df_subset.plot(kind='scatter', x='initial_cost', y='total_est_fee', rot=70)
+plt.show()
+```
+![img3](imgs/img3.svg)
+![img4](imgs/img4.svg)
+
