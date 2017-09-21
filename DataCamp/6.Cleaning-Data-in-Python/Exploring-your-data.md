@@ -100,8 +100,52 @@ df.describe()
         * *True* by defalut
         * not give a freq. count for missing data in a col.
         * Set to *False* if missing in a col. and want to the freq. counts
-```python {.input, n=1}
+```python {.input}
 print(df['Borough'].value_counts(dropna=False))
 print(df['State'].value_counts(dropna=False))
 print(df['Site Fill'].value_counts(dropna=False))
+```
+```python {.output}
+    MANHATTAN        6310
+    BROOKLYN         2866
+    QUEENS           2121
+    BRONX             974
+    STATEN ISLAND     575
+    Name: Borough, dtype: int64
+    NY    12391
+    NJ      241
+    PA       38
+    CA       20
+    OH       19
+    IL       17
+    FL       17
+    CT       16
+    TX       13
+    TN       10
+    DC        7
+    MD        7
+    GA        6
+    KS        6
+    MA        6
+    VA        5
+    CO        4
+    MN        3
+    WI        3
+    AZ        3
+    SC        3
+    RI        2
+    UT        2
+    NC        2
+    NM        1
+    WA        1
+    IN        1
+    VT        1
+    MI        1
+    Name: State, dtype: int64
+    NOT APPLICABLE                              7806
+    NaN                                         4205
+    ON-SITE                                      519
+    OFF-SITE                                     186
+    USE UNDER 300 CU.YD                          130
+    Name: Site Fill, dtype: int64
 ```
